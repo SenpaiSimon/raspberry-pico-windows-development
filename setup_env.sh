@@ -37,14 +37,14 @@ mkdir $TEMP_FOLDER
 
 # ------------------------------------------------------------------------------------ #
 
-# echo "Updating pacman and installing packages..."
-# echo "Accept prompts if asked :)"
-# echo ""
+echo "Updating pacman and installing packages..."
+echo "Accept prompts if asked :)"
+echo ""
 
-# pacman -Syu 
-# pacman -Su
-# pacman -S mingw-w64-x86_64-toolchain git make libtool pkg-config autoconf automake texinfo wget
-# echo ""
+pacman -Syu 
+pacman -Su
+pacman -S mingw-w64-x86_64-toolchain git make libtool pkg-config autoconf automake texinfo wget
+echo ""
 
 printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
 
