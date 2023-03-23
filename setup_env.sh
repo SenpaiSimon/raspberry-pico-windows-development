@@ -5,7 +5,7 @@ EXTSCRIPTS_PATH="$SKRIPT_PATH/Scripts"
 FOLDER_NAME="PicoEnviroment"
 TEMP_FOLDER="TempDir"
 # TODO add -m
-# SETXPARAM="-m"
+SETXPARAM="-m"
 
 # ------------------------------------------------------------------------------------ #
 
