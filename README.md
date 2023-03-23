@@ -125,7 +125,7 @@ To change the build tools again press `Strg + Shift + P` and type in `cmake: sel
 
 ![menu](./pics/buildTool.png)
 
-If your list does not contain the last four entries then select `[Scan for kits]` and try again. Now select one of the two compilers with `amd64_x86` or with `x86_amd64` in its name. If one of the two does not work, then try the other one. 
+If your list does not contain the last four entries then select `[Scan for kits]` and try again. Now select GCC x.x.x `arm-none-eabi` as your compiler. 
 
 ---
 

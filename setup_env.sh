@@ -37,16 +37,16 @@ mkdir $TEMP_FOLDER
 
 # ------------------------------------------------------------------------------------ #
 
-# echo "Updating pacman and installing packages..."
-# echo "Accept prompts if asked :)"
-# echo ""
+echo "Updating pacman and installing packages..."
+echo "Accept prompts if asked :)"
+echo ""
 
-# pacman -Syu 
-# pacman -Su
-# pacman -S mingw-w64-x86_64-toolchain git make libtool pkg-config autoconf automake texinfo wget
-# echo ""
+pacman -Syu 
+pacman -Su
+pacman -S mingw-w64-x86_64-toolchain git make libtool pkg-config autoconf automake texinfo wget
+echo ""
 
-# printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
+printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
 
 # ------------------------------------------------------------------------------------ #
 
@@ -113,21 +113,22 @@ printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}
 
 # ------------------------------------------------------------------------------------ #
 
-# echo "Downloading gcc-arm-none-eabi Compiler"
-# echo ""
-# cd $SKRIPT_PATH/$FOLDER_NAME/$TEMP_FOLDER
-# echo -e "Downloading.. ${RED}(this may take some time)${NOCOLOR}"
-# wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-win32.zip -q
-# echo -e "Unzipping.. ${RED}(this may take some time)${NOCOLOR}"
-# unzip -q gcc-arm-none-eabi-10.3-2021.10-win32.zip > nul
-# echo -e "${GREEN}Done!${NOCOLOR}"
+echo "Downloading gcc-arm-none-eabi Compiler"
+echo ""
+cd $SKRIPT_PATH/$FOLDER_NAME/$TEMP_FOLDER
+echo -e "Downloading.. ${RED}(this may take some time)${NOCOLOR}"
+wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-win32.zip -q
+echo -e "Unzipping.. ${RED}(this may take some time)${NOCOLOR}"
+unzip -q gcc-arm-none-eabi-10.3-2021.10-win32.zip > nul
+echo -e "${GREEN}Done!${NOCOLOR}"
 
-# mv gcc-arm-none-eabi-10.3-2021.10 ..
-# cd $SKRIPT_PATH/$FOLDER_NAME/
-# posixPath="$SKRIPT_PATH/$FOLDER_NAME/gcc-arm-none-eabi-10.3-2021.10/bin"
-# gccPath=$(echo "$posixPath" | sed -e 's/^\///' -e 's/\//\\/g' -e 's/^./\0:/')
+mv gcc-arm-none-eabi-10.3-2021.10 ..
+cd $SKRIPT_PATH/$FOLDER_NAME/
+posixPath="$SKRIPT_PATH/$FOLDER_NAME/gcc-arm-none-eabi-10.3-2021.10/bin"
+setx $SETXPARAM ARM_NONE_EABI_GCC_PATH "$posixPath" > nul
+gccPath=$(echo "$posixPath" | sed -e 's/^\///' -e 's/\//\\/g' -e 's/^./\0:/')
 
-# printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
+printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
 
 # ------------------------------------------------------------------------------------ #
 
@@ -221,7 +222,7 @@ echo ""
 echo -e "${RED}IMPORTANT NOTE${NOCOLOR}"
 echo "Add the following paths to your windows path variable"
 echo ""
-# echo "$gccPath"
+echo "$gccPath"
 echo "$cmakePath"
 echo "$makePath"
 echo "$picotoolPath"
