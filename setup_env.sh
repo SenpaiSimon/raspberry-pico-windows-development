@@ -5,7 +5,7 @@ EXTSCRIPTS_PATH="$SKRIPT_PATH/Scripts"
 FOLDER_NAME="PicoEnviroment"
 TEMP_FOLDER="TempDir"
 # TODO add -m
-SETXPARAM="-m"
+# SETXPARAM="-m"
 
 # ------------------------------------------------------------------------------------ #
 
@@ -19,11 +19,11 @@ NOCOLOR='\033[0m'
 # ------------------------------------------------------------------------------------ #
 
 # check for admin
-admin=$($EXTSCRIPTS_PATH/adminCheck.bat)
-if [[ "$admin" == 1 ]]; then
-    echo -e "${RED}Please run as administrator!${NOCOLOR}"
-    exit
-fi
+# admin=$($EXTSCRIPTS_PATH/adminCheck.bat)
+# if [[ "$admin" == 1 ]]; then
+#     echo -e "${RED}Please run as administrator!${NOCOLOR}"
+#     exit
+# fi
 
 # ------------------------------------------------------------------------------------ #
 
@@ -37,21 +37,23 @@ mkdir $TEMP_FOLDER
 
 # ------------------------------------------------------------------------------------ #
 
-echo "Updating pacman and installing packages..."
-echo "Accept prompts if asked :)"
-echo ""
+# echo "Updating pacman and installing packages..."
+# echo "Accept prompts if asked :)"
+# echo ""
 
-pacman -Syu 
-pacman -Su
-pacman -S mingw-w64-x86_64-toolchain git make libtool pkg-config autoconf automake texinfo wget
-echo ""
+# pacman -Syu 
+# pacman -Su
+# pacman -S mingw-w64-x86_64-toolchain git make libtool pkg-config autoconf automake texinfo wget
+# echo ""
 
-printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
+# printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
 
 # ------------------------------------------------------------------------------------ #
 
 echo "Pulling Pico-Sdk and Setting Path..."
 git clone https://github.com/raspberrypi/pico-sdk.git -q
+cd $SKRIPT_PATH/$FOLDER_NAME/pico-sdk
+git submodule update --init -q
 setx $SETXPARAM PICO_SDK_PATH "$SKRIPT_PATH/$FOLDER_NAME/pico-sdk" > nul
 export PICO_SDK_PATH="$SKRIPT_PATH/$FOLDER_NAME/pico-sdk" > nul
 echo -e "${GREEN}Path for Pico-Sdk set!${NOCOLOR}"
@@ -111,21 +113,21 @@ printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}
 
 # ------------------------------------------------------------------------------------ #
 
-echo "Downloading gcc-arm-none-eabi Compiler"
-echo ""
-cd $SKRIPT_PATH/$FOLDER_NAME/$TEMP_FOLDER
-echo -e "Downloading.. ${RED}(this may take some time)${NOCOLOR}"
-wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-win32.zip -q
-echo -e "Unzipping.. ${RED}(this may take some time)${NOCOLOR}"
-unzip -q gcc-arm-none-eabi-10.3-2021.10-win32.zip > nul
-echo -e "${GREEN}Done!${NOCOLOR}"
+# echo "Downloading gcc-arm-none-eabi Compiler"
+# echo ""
+# cd $SKRIPT_PATH/$FOLDER_NAME/$TEMP_FOLDER
+# echo -e "Downloading.. ${RED}(this may take some time)${NOCOLOR}"
+# wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-win32.zip -q
+# echo -e "Unzipping.. ${RED}(this may take some time)${NOCOLOR}"
+# unzip -q gcc-arm-none-eabi-10.3-2021.10-win32.zip > nul
+# echo -e "${GREEN}Done!${NOCOLOR}"
 
-mv gcc-arm-none-eabi-10.3-2021.10 ..
-cd $SKRIPT_PATH/$FOLDER_NAME/
-posixPath="$SKRIPT_PATH/$FOLDER_NAME/gcc-arm-none-eabi-10.3-2021.10/bin"
-gccPath=$(echo "$posixPath" | sed -e 's/^\///' -e 's/\//\\/g' -e 's/^./\0:/')
+# mv gcc-arm-none-eabi-10.3-2021.10 ..
+# cd $SKRIPT_PATH/$FOLDER_NAME/
+# posixPath="$SKRIPT_PATH/$FOLDER_NAME/gcc-arm-none-eabi-10.3-2021.10/bin"
+# gccPath=$(echo "$posixPath" | sed -e 's/^\///' -e 's/\//\\/g' -e 's/^./\0:/')
 
-printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
+# printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
 
 # ------------------------------------------------------------------------------------ #
 
@@ -158,6 +160,16 @@ echo -e "${GREEN}Done!${NOCOLOR}"
 mv make ..
 posixPath="$SKRIPT_PATH/$FOLDER_NAME/make/bin"
 makePath=$(echo "$posixPath" | sed -e 's/^\///' -e 's/\//\\/g' -e 's/^./\0:/')
+
+printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
+
+# ------------------------------------------------------------------------------------ #
+
+echo "Downloading Zadig"
+echo ""
+cd $SKRIPT_PATH/$FOLDER_NAME
+wget https://github.com/pbatard/libwdi/releases/download/v1.5.0/zadig-2.8.exe -q
+echo -e "${GREEN}Done!${NOCOLOR}"
 
 printf "\n${BLUE}-----------------------------------------------------${NOCOLOR}\n"
 
@@ -209,7 +221,7 @@ echo ""
 echo -e "${RED}IMPORTANT NOTE${NOCOLOR}"
 echo "Add the following paths to your windows path variable"
 echo ""
-echo "$gccPath"
+# echo "$gccPath"
 echo "$cmakePath"
 echo "$makePath"
 echo "$picotoolPath"
